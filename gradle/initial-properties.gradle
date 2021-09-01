@@ -1,0 +1,7 @@
+// artifact-versions
+File artifactProperties = file("${rootProject.projectDir}/artifact.properties");
+artifactProperties.withReader { reader ->
+  Properties properties = new Properties();
+  properties.load(reader);
+  properties.each { property -> ext[property.key] = property.value }
+}
