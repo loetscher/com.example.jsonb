@@ -12,7 +12,7 @@ import org.junit.jupiter.api.Test;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-public class GridStateChangeTest {
+class GridStateChangeTest {
 
   private static final String JSON_SAMPLE = "{" //
       + "                \"rowsWritable\": {" //
