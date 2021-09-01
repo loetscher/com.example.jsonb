@@ -5,17 +5,17 @@ import java.util.HashMap;
 import java.util.Map;
 
 public class GridStateChange {
-  private Map<Integer, Map<String, String>> rowsWritable; // key = rowIndex
+  private Map<Integer, Boolean> rowsWritable; // key = rowIndex
 
   public GridStateChange() {
     this.rowsWritable = new HashMap<>();
   }
 
-  public Map<Integer, Map<String, String>> getRowsWritable() {
+  public Map<Integer, Boolean> getRowsWritable() {
     return rowsWritable;
   }
 
-  public void setRowsWritable(Map<Integer, Map<String, String>> rowsWritable) {
+  public void setRowsWritable(Map<Integer, Boolean> rowsWritable) {
     this.rowsWritable = rowsWritable;
   }
 }

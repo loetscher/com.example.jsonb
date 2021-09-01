@@ -16,15 +16,13 @@ public class GridStateChangeTest {
 
   private static final String JSON_SAMPLE = "{" //
       + "                \"rowsWritable\": {" //
-      + "                    \"9\": {" //
-      + "                        \"fastchange.FastchangeGroup.Fastchange.grid.Consumption\": \"4\"" //
-      + "                    }" //
+      + "                    \"9\": \"true\"" //
       + "                }" //
       + "            }";
 
   @Test
-  void deserializeJsonBGridStateChangeIntegerKeyTest() {
-    // Create Jsonb and serialize
+  void deserializeWithJsonB() {
+
     Jsonb jsonb = JsonbBuilder.create();
     GridStateChange gridStateChange = jsonb.fromJson(JSON_SAMPLE, GridStateChange.class);
 
@@ -34,8 +32,8 @@ public class GridStateChangeTest {
   }
 
   @Test
-  void deserializeJacksonGridStateChangeIntegerKeyJacksonTest() throws IOException {
-    // Create Jsonb and serialize
+  void deserializeWithJackson() throws IOException {
+
     ObjectMapper objectMapper = new ObjectMapper();
     GridStateChange gridStateChange = objectMapper.readValue(JSON_SAMPLE, GridStateChange.class);
 
