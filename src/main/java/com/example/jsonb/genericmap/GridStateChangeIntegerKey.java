@@ -1,12 +1,10 @@
 
 package com.example.jsonb.genericmap;
 
-import java.io.Serializable;
 import java.util.HashMap;
 import java.util.Map;
 
-public class GridStateChangeIntegerKey extends GridState implements Serializable {
-  private static final long serialVersionUID = 1L;
+public class GridStateChangeIntegerKey {
   private Map<Integer, Map<String, String>> rowsWritable; // key = rowIndex
 
   public GridStateChangeIntegerKey() {
