@@ -26,7 +26,7 @@ class GridStateChangeTest {
     Jsonb jsonb = JsonbBuilder.create();
     GridStateChange gridStateChange = jsonb.fromJson(JSON_SAMPLE, GridStateChange.class);
 
-    // parsing the above json with jackson, this assertion fails as the key is of type String, not Integer
+    // parsing the above json with jsonb, this assertion fails as the key is of type String instead of Integer
     assertTrue(gridStateChange.getRowsWritable().containsKey(Integer.valueOf(9)));
 
   }
@@ -37,7 +37,7 @@ class GridStateChangeTest {
     ObjectMapper objectMapper = new ObjectMapper();
     GridStateChange gridStateChange = objectMapper.readValue(JSON_SAMPLE, GridStateChange.class);
 
-    // parsing the above json with jackson, this assertion IS "true"
+    // parsing the above json with jackson, this assertion IS "true" as the key is set as an Integer (as in GridStateChange defined)
     assertTrue(gridStateChange.getRowsWritable().containsKey(Integer.valueOf(9)));
 
   }
