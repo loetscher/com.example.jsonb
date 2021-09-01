@@ -4,10 +4,10 @@ package com.example.jsonb.genericmap;
 import java.util.HashMap;
 import java.util.Map;
 
-public class GridStateChangeIntegerKey {
+public class GridStateChange {
   private Map<Integer, Map<String, String>> rowsWritable; // key = rowIndex
 
-  public GridStateChangeIntegerKey() {
+  public GridStateChange() {
     this.rowsWritable = new HashMap<>();
   }
 
