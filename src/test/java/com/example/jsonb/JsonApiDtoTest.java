@@ -10,7 +10,7 @@ import javax.json.bind.JsonbBuilder;
 
 import org.junit.jupiter.api.Test;
 
-import com.example.jsonb.genericmap.GridStateChange;
+import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
 class JsonApiDtoTest {
@@ -22,12 +22,57 @@ class JsonApiDtoTest {
   }
 
   @Test
-  void serialiceWithJsonB() {
+  void serializeLinkExtJsonB() {
+
+    LinkExt link = new LinkExt();
+    link.setSelf("self");
+    link.setLast("last");
+    link.setNext("next");
 
     Jsonb jsonb = JsonbBuilder.create();
-    String dtoSerialized = jsonb.toJson(DTO, GridStateChange.class);
+    String linkString = jsonb.toJson(link);
+
+    assertNotNull(linkString);
+
+  }
+
+  @Test
+  void serializeLinkJsonB() {
+
+    Links link = new Links();
+    link.setSelf("self");
+    link.setLast("last");
+    link.setNext("next");
+
+    Jsonb jsonb = JsonbBuilder.create();
+    String linkString = jsonb.toJson(link);
+
+    assertNotNull(linkString);
+
+  }
+
+  @Test
+  void serializeWithJsonB() {
+
+    Jsonb jsonb = JsonbBuilder.create();
+    String dtoSerialized = jsonb.toJson(DTO);
 
     assertNotNull(dtoSerialized);
+
+  }
+
+  @Test
+  void serializeLinkJackson() throws JsonProcessingException {
+
+    Links link = new Links();
+    link.setSelf("self");
+    link.setLast("last");
+    link.setNext("next");
+
+    ObjectMapper objectMapper = new ObjectMapper();
+    String linkString = objectMapper.writeValueAsString(link);
+
+    assertNotNull(linkString);
 
   }
 
