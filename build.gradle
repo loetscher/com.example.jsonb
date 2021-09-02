@@ -14,7 +14,9 @@ dependencies {
   testImplementation "com.fasterxml.jackson.core:jackson-databind:2.1.1"
   testImplementation "org.junit.jupiter:junit-jupiter-api:${rev_junit_jupiter}"
  
-  testImplementation "javax.json.bind:javax.json.bind-api:1.0"
+  implementation 'jakarta.json.bind:jakarta.json.bind-api:1.0.2'
+  implementation "jakarta.json:jakarta.json-api:1.1.6"
+  
   testRuntimeOnly "org.eclipse:yasson:${rev_yasson}"
   testRuntimeOnly "org.glassfish:javax.json:1.1.2"
     
