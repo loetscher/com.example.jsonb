@@ -1,8 +1,11 @@
 
-package com.example.jsonb;
+package com.example.jsonb.innerclass;
 
 import static org.junit.Assert.assertNotNull;
 
+import com.example.jsonb.innerclass.JsonApiDto;
+import com.example.jsonb.innerclass.LinkExt;
+import com.example.jsonb.innerclass.Links;
 import java.io.IOException;
 
 import javax.json.bind.Jsonb;

@@ -1,5 +1,5 @@
 
-package com.example.jsonb;
+package com.example.jsonb.innerclass;
 
 public class JsonApiDto {
   private Links linksObject;
