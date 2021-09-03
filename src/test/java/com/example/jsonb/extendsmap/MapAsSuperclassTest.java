@@ -13,7 +13,7 @@ import org.junit.jupiter.api.Test;
 
 class MapAsSuperclassTest {
 
-//  @Test
+  @Test
   void objectExtendsHashmap() {
     Jsonb jsonb = JsonbBuilder.create();
     MapAsSuperclass changes = jsonb.fromJson("{" //
@@ -26,14 +26,14 @@ class MapAsSuperclassTest {
 
   }
 
-//  @Test
+  @Test
   void HashmapDirect() {
     Jsonb jsonb = JsonbBuilder.create();
     Map<String, SomeDto> changes = jsonb.fromJson("{" //
                     + "            \"decision.grid\": {\r\n" //
                     + "                \"cursorColumn\": -99\r\n" //
                     + "            }" + "        }",
-            HashMap.class);
+            new HashMap<String, SomeDto>() { }.getClass().getGenericSuperclass());
     Object singleChange = changes.get("decision.grid");
     assertThat(singleChange, instanceOf(SomeDto.class));
     assertNotNull(singleChange);
