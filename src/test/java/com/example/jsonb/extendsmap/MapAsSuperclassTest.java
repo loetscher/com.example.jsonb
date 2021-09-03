@@ -5,24 +5,21 @@ import static org.hamcrest.core.IsInstanceOf.instanceOf;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertThat;
 
-import com.fasterxml.jackson.core.JsonProcessingException;
-import com.fasterxml.jackson.databind.ObjectMapper;
-import java.io.IOException;
 import java.util.HashMap;
 import java.util.Map;
 import javax.json.bind.Jsonb;
 import javax.json.bind.JsonbBuilder;
 import org.junit.jupiter.api.Test;
 
-class MapSuperclassTest {
+class MapAsSuperclassTest {
 
   @Test
   void objectExtendsHashmap() {
     Jsonb jsonb = JsonbBuilder.create();
-    MapSuperclass changes = jsonb.fromJson("{" //
+    MapAsSuperclass changes = jsonb.fromJson("{" //
             + "            \"decision.grid\": {\r\n" //
             + "                \"cursorColumn\": -99\r\n" //
-            + "            }" + "        }", MapSuperclass.class);
+            + "            }" + "        }", MapAsSuperclass.class);
     Object singleChange = changes.get("decision.grid");
     assertThat(singleChange, instanceOf(SomeDto.class));
     assertNotNull(singleChange);

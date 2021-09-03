@@ -5,7 +5,6 @@ import static org.hamcrest.core.IsInstanceOf.instanceOf;
 import static org.junit.Assert.assertNotNull;
 import static org.junit.Assert.assertThat;
 
-import com.example.jsonb.genericmap.GridStateChange;
 import com.fasterxml.jackson.databind.ObjectMapper;
 import java.io.IOException;
 import java.util.Map;
@@ -13,7 +12,7 @@ import javax.json.bind.Jsonb;
 import javax.json.bind.JsonbBuilder;
 import org.junit.jupiter.api.Test;
 
-class UseGenericMapTest {
+class UseMapAsSuperclassTest {
 
   private static final String JSON_SAMPLE = "{ \"value\": {" //
           + "            \"decision.grid\": {" //
@@ -21,21 +20,35 @@ class UseGenericMapTest {
           + "            }}}";
 
   @Test
-  void objectExtendsHashmapJsonB() {
+  void objectExtendsHashmapDeserializeTestJsonB() {
     Jsonb jsonb = JsonbBuilder.create();
-    UseGenericMap changes = jsonb.fromJson(JSON_SAMPLE, UseGenericMap.class);
+    UseMapAsSuperclass changes = jsonb.fromJson(JSON_SAMPLE, UseMapAsSuperclass.class);
+    MapAsSuperclass singleChange = changes.getValue();
+    assertThat(singleChange.get("decision.grid"), instanceOf(SomeDto.class));
+    assertNotNull(singleChange);
+  }
+
+  @Test
+  void objectExtendsHashmapDeserializeTestJackson() throws IOException {
+    ObjectMapper objectMapper = new ObjectMapper();
+    UseGenericMap changes = objectMapper.readValue(JSON_SAMPLE, UseGenericMap.class);
     Map<String, SomeDto> singleChange = changes.getValue();
     assertNotNull(singleChange);
     assertThat(singleChange.get("decision.grid"), instanceOf(SomeDto.class));
   }
 
   @Test
-  void objectExtendsHashmapJackson() throws IOException {
-    ObjectMapper objectMapper = new ObjectMapper();
-    UseGenericMap changes = objectMapper.readValue(JSON_SAMPLE, UseGenericMap.class);
-    Map<String, SomeDto> singleChange = changes.getValue();
-    assertNotNull(singleChange);
-    assertThat(singleChange.get("decision.grid"), instanceOf(SomeDto.class));
+  void objectExtendsHashmapSerializeTest() {
+    Jsonb jsonb = JsonbBuilder.create();
+    MapAsSuperclass cut = new MapAsSuperclass();
+    SomeDto dto = new SomeDto();
+    dto.setCursorColumn(123);
+    cut.put("mykey", dto);
+
+    dto = new SomeDto();
+    dto.setCursorColumn(789);
+    cut.put("mykey2", dto);
+    System.out.println(jsonb.toJson(cut));
   }
 
 }
