@@ -12,7 +12,7 @@ import org.junit.jupiter.api.Test;
 
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-class GridStateChangeTest {
+class ClassContainsMemberHashMapWithIntegerKeyTest {
 
   private static final String JSON_SAMPLE = "{" //
       + "                \"rowsWritable\": {" //
@@ -24,10 +24,10 @@ class GridStateChangeTest {
   void deserializeWithJsonB() {
 
     Jsonb jsonb = JsonbBuilder.create();
-    GridStateChange gridStateChange = jsonb.fromJson(JSON_SAMPLE, GridStateChange.class);
+    ClassContainsMemberHashMapWithIntegerKey classContainsMemberHashMapWithIntegerKey = jsonb.fromJson(JSON_SAMPLE, ClassContainsMemberHashMapWithIntegerKey.class);
 
     // parsing the above json with jsonb, this assertion fails as the key is of type String instead of Integer
-    assertTrue(gridStateChange.getRowsWritable().containsKey(Integer.valueOf(9)));
+    assertTrue(classContainsMemberHashMapWithIntegerKey.getRowsWritable().containsKey(Integer.valueOf(9)));
 
   }
 
@@ -35,10 +35,10 @@ class GridStateChangeTest {
   void deserializeWithJackson() throws IOException {
 
     ObjectMapper objectMapper = new ObjectMapper();
-    GridStateChange gridStateChange = objectMapper.readValue(JSON_SAMPLE, GridStateChange.class);
+    ClassContainsMemberHashMapWithIntegerKey classContainsMemberHashMapWithIntegerKey = objectMapper.readValue(JSON_SAMPLE, ClassContainsMemberHashMapWithIntegerKey.class);
 
-    // parsing the above json with jackson, this assertion IS "true" as the key is set as an Integer (as in GridStateChange defined)
-    assertTrue(gridStateChange.getRowsWritable().containsKey(Integer.valueOf(9)));
+    // parsing the above json with jackson, this assertion IS "true" as the key is set as an Integer (as in ClassContainsMemberHashMapWithIntegerKey defined)
+    assertTrue(classContainsMemberHashMapWithIntegerKey.getRowsWritable().containsKey(Integer.valueOf(9)));
 
   }
 

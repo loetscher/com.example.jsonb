@@ -3,9 +3,6 @@ package com.example.jsonb.innerclass;
 
 import static org.junit.Assert.assertNotNull;
 
-import com.example.jsonb.innerclass.JsonApiDto;
-import com.example.jsonb.innerclass.LinkExt;
-import com.example.jsonb.innerclass.Links;
 import java.io.IOException;
 
 import javax.json.bind.Jsonb;
@@ -16,12 +13,12 @@ import org.junit.jupiter.api.Test;
 import com.fasterxml.jackson.core.JsonProcessingException;
 import com.fasterxml.jackson.databind.ObjectMapper;
 
-class JsonApiDtoTest {
+class ClassContainsInnerClassTest {
 
-  private static JsonApiDto DTO;
+  private static ClassContainsInnerClass DTO;
 
   static {
-    DTO = new JsonApiDto(new Links().setSelf("self").setLast("last").setNext("next"));
+    DTO = new ClassContainsInnerClass(new Links().setSelf("self").setLast("last").setNext("next"));
   }
 
   @Test
@@ -55,12 +52,27 @@ class JsonApiDtoTest {
   }
 
   @Test
-  void serializeWithJsonB() {
+  void serializeClassContainsInnerClassWithJsonB() {
 
     Jsonb jsonb = JsonbBuilder.create();
     String dtoSerialized = jsonb.toJson(DTO);
 
     assertNotNull(dtoSerialized);
+
+  }
+
+  @Test
+  void serializeLinkExtJackson() throws JsonProcessingException {
+
+    LinkExt link = new LinkExt();
+    link.setSelf("self");
+    link.setLast("last");
+    link.setNext("next");
+
+    ObjectMapper objectMapper = new ObjectMapper();
+    String linkString = objectMapper.writeValueAsString(link);;
+
+    assertNotNull(linkString);
 
   }
 
@@ -80,7 +92,7 @@ class JsonApiDtoTest {
   }
 
   @Test
-  void serializeWithJackson() throws IOException {
+  void serializeClassContainsInnerClassWithJackson() throws IOException {
 
     ObjectMapper objectMapper = new ObjectMapper();
     String dtoSerialized = objectMapper.writeValueAsString(DTO);

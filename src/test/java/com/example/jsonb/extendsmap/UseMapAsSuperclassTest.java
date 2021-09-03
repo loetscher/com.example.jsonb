@@ -20,7 +20,7 @@ class UseMapAsSuperclassTest {
           + "            }}}";
 
   @Test
-  void objectExtendsHashmapDeserializeTestJsonB() {
+  void deserializeUseMapAsSuperclassJsonB() {
     Jsonb jsonb = JsonbBuilder.create();
     UseMapAsSuperclass changes = jsonb.fromJson(JSON_SAMPLE, UseMapAsSuperclass.class);
     MapAsSuperclass singleChange = changes.getValue();
@@ -29,7 +29,26 @@ class UseMapAsSuperclassTest {
   }
 
   @Test
-  void objectExtendsHashmapDeserializeTestJackson() throws IOException {
+  void deserializeUseMapAsSuperclassJackson() throws IOException {
+    ObjectMapper objectMapper = new ObjectMapper();
+    UseMapAsSuperclass changes = objectMapper.readValue(JSON_SAMPLE, UseMapAsSuperclass.class);
+    MapAsSuperclass singleChange = changes.getValue();
+    assertThat(singleChange.get("decision.grid"), instanceOf(SomeDto.class));
+    assertNotNull(singleChange);
+  }
+
+
+  @Test
+  void deserializeUseGenericMapJsonB() throws IOException {
+    Jsonb jsonb = JsonbBuilder.create();
+    UseGenericMap changes = jsonb.fromJson(JSON_SAMPLE, UseGenericMap.class);
+    Map<String, SomeDto> singleChange = changes.getValue();
+    assertNotNull(singleChange);
+    assertThat(singleChange.get("decision.grid"), instanceOf(SomeDto.class));
+  }
+
+  @Test
+  void deserializeUseGenericMapJackson() throws IOException {
     ObjectMapper objectMapper = new ObjectMapper();
     UseGenericMap changes = objectMapper.readValue(JSON_SAMPLE, UseGenericMap.class);
     Map<String, SomeDto> singleChange = changes.getValue();
@@ -38,7 +57,7 @@ class UseMapAsSuperclassTest {
   }
 
   @Test
-  void objectExtendsHashmapSerializeTest() {
+  void serializeObjectExtendsHashmapJsonB() {
     Jsonb jsonb = JsonbBuilder.create();
     MapAsSuperclass cut = new MapAsSuperclass();
     SomeDto dto = new SomeDto();

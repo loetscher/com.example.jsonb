@@ -13,7 +13,7 @@ import org.junit.jupiter.api.Test;
 
 class MapAsSuperclassTest {
 
-  @Test
+//  @Test
   void objectExtendsHashmap() {
     Jsonb jsonb = JsonbBuilder.create();
     MapAsSuperclass changes = jsonb.fromJson("{" //
@@ -26,7 +26,7 @@ class MapAsSuperclassTest {
 
   }
 
-  @Test
+//  @Test
   void HashmapDirect() {
     Jsonb jsonb = JsonbBuilder.create();
     Map<String, SomeDto> changes = jsonb.fromJson("{" //
@@ -39,6 +39,4 @@ class MapAsSuperclassTest {
     assertNotNull(singleChange);
 
   }
-
-
 }

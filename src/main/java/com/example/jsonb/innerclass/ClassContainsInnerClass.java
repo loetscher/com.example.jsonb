@@ -1,15 +1,14 @@
 
 package com.example.jsonb.innerclass;
 
-public class JsonApiDto {
+public class ClassContainsInnerClass {
   private Links linksObject;
 
-  public JsonApiDto(Links linksObject) {
+  public ClassContainsInnerClass(Links linksObject) {
     this.linksObject = linksObject;
   }
 
   // Getter Methods
-
   public Links getLinks() {
     return linksObject;
   }
